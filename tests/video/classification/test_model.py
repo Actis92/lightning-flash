@@ -139,15 +139,6 @@ def test_video_classifier_finetune_from_folders(tmpdir):
 
         assert len(VideoClassifier.available_backbones()) > 5
 
-        datamodule = VideoClassificationData.from_folders(
-            train_folder=mock_csv,
-            clip_sampler="uniform",
-            clip_duration=half_duration,
-            video_sampler=SequentialSampler,
-            decode_audio=False,
-            batch_size=1,
-        )
-
         model = VideoClassifier(num_classes=datamodule.num_classes, pretrained=False, backbone="slow_r50")
         trainer = flash.Trainer(default_root_dir=tmpdir, fast_dev_run=True, gpus=torch.cuda.device_count())
         trainer.finetune(model, datamodule=datamodule)
@@ -187,16 +178,6 @@ def test_video_classifier_finetune_from_files(tmpdir):
 
         assert len(VideoClassifier.available_backbones()) > 5
 
-        datamodule = VideoClassificationData.from_files(
-            train_files=files,
-            train_targets=labels,
-            clip_sampler="uniform",
-            clip_duration=half_duration,
-            video_sampler=SequentialSampler,
-            decode_audio=False,
-            batch_size=1,
-        )
-
         model = VideoClassifier(num_classes=datamodule.num_classes, pretrained=False, backbone="slow_r50")
         trainer = flash.Trainer(default_root_dir=tmpdir, fast_dev_run=True, gpus=torch.cuda.device_count())
         trainer.finetune(model, datamodule=datamodule)
@@ -231,15 +212,6 @@ def test_video_classifier_finetune_fiftyone(tmpdir):
             assert sample["video"].shape[1] == expected_t_shape
 
         assert len(VideoClassifier.available_backbones()) > 5
-
-        datamodule = VideoClassificationData.from_fiftyone(
-            train_dataset=train_dataset,
-            clip_sampler="uniform",
-            clip_duration=half_duration,
-            video_sampler=SequentialSampler,
-            decode_audio=False,
-            batch_size=1,
-        )
 
         model = VideoClassifier(num_classes=datamodule.num_classes, pretrained=False, backbone="slow_r50")
         trainer = flash.Trainer(fast_dev_run=True, gpus=torch.cuda.device_count())
