@@ -16,9 +16,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Added support for COCO annotations with non-default keypoint labels to `KeypointDetectionData.from_coco` ([#1102](https://github.com/PyTorchLightning/lightning-flash/pull/1102))
 
+- Added support for `from_csv` and `from_data_frame` to `VideoClassificationData` ([#1117](https://github.com/PyTorchLightning/lightning-flash/pull/1117))
+
 ### Changed
 
 - Changed `Wav2Vec2Processor` to `AutoProcessor` and seperate it from backbone [optional] ([#1075](https://github.com/PyTorchLightning/lightning-flash/pull/1075))
+
+- Renamed `ClassificationInput` to `ClassificationInputMixin` ([#1116](https://github.com/PyTorchLightning/lightning-flash/pull/1116))
 
 ### Deprecated
 
@@ -53,6 +57,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed a bug where `InstanceSegmentationData.from_coco` would raise an error if not using file-based masks ([#1102](https://github.com/PyTorchLightning/lightning-flash/pull/1102))
 
 - Fixed `InstanceSegmentationData.from_voc` ([#1102](https://github.com/PyTorchLightning/lightning-flash/pull/1102))
+
+- Fixed a bug when loading tabular data for prediction without a target field / column ([#1114](https://github.com/PyTorchLightning/lightning-flash/pull/1114))
+
+- Fixed a bug when loading prediction data for graph classification without targets ([#1121](https://github.com/PyTorchLightning/lightning-flash/pull/1121))
 
 ### Removed
 
